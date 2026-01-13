@@ -1,0 +1,29 @@
+package com.springboot.university.domain.subject;
+
+import com.springboot.university.domain.department.Department;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Subject {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String subjectName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SubjectType type; // MAJOR, ELECTIVE
+
+    @Column(nullable = false)
+    private Integer credit;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_id", nullable = false)
+    private Department department;
+}
