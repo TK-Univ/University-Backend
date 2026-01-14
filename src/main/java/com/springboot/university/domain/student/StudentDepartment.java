@@ -3,13 +3,13 @@ package com.springboot.university.domain.student;
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.MajorType;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class StudentDepartment {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

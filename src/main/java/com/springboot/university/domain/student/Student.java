@@ -1,9 +1,7 @@
 package com.springboot.university.domain.student;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +9,9 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Student {
 
     @Id
@@ -33,7 +33,7 @@ public class Student {
     @Column(nullable = false)
     private StudentStatus status;
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 200)
     private String password;
 
     @Column(length = 40)
