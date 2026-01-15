@@ -19,6 +19,10 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final DepartmentRepository departmentRepository;
 
+    public List<String> fetchNames() {
+        return studentRepository.findAllNames();
+    }
+
     public Long register(StudentRegisterRequestDTO dto) {
         Department department = departmentRepository.findByDeptName(dto.deptName())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학과입니다: " + dto.deptName()));
