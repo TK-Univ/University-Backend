@@ -1,5 +1,6 @@
 package com.springboot.university.domain.student;
 
+import com.springboot.university.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Student {
+public class Student extends BaseEntity {
 
     @Id
     private Long id;

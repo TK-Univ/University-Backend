@@ -1,5 +1,6 @@
 package com.springboot.university.domain.subject;
 
+import com.springboot.university.common.BaseEntity;
 import com.springboot.university.domain.department.Department;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Subject {
+public class Subject extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

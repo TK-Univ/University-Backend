@@ -1,5 +1,6 @@
 package com.springboot.university.domain.department;
 
+import com.springboot.university.common.BaseEntity;
 import com.springboot.university.domain.student.StudentDepartment;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Department {
+public class Department extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

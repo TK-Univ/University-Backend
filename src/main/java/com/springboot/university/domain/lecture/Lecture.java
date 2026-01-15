@@ -1,5 +1,6 @@
 package com.springboot.university.domain.lecture;
 
+import com.springboot.university.common.BaseEntity;
 import com.springboot.university.domain.professor.Professor;
 import com.springboot.university.domain.subject.Subject;
 import jakarta.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Lecture {
+public class Lecture extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
