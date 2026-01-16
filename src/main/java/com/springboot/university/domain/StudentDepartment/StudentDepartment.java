@@ -1,7 +1,8 @@
-package com.springboot.university.domain.student;
+package com.springboot.university.domain.StudentDepartment;
 
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.MajorType;
+import com.springboot.university.domain.student.Student;
 import jakarta.persistence.*;
 import lombok.*;
 

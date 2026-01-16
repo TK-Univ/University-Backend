@@ -15,6 +15,9 @@ public class Staff {
     private Long id;
 
     @Column(nullable = false, length = 20)
+    private String userId;
+
+    @Column(nullable = false, length = 20)
     private String staffName;
 
     @Column(length = 20)

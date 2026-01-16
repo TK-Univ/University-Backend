@@ -1,9 +1,9 @@
 package com.springboot.university.domain.student;
 
+import com.springboot.university.domain.StudentDepartment.StudentDepartment;
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.DepartmentRepository;
 import com.springboot.university.domain.department.MajorType;
-import com.springboot.university.domain.student.dto.StudentInfoDTO;
 import com.springboot.university.domain.student.dto.StudentRegisterRequestDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

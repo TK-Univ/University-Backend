@@ -1,18 +1,18 @@
 package com.springboot.university.domain.department;
 
 import com.springboot.university.common.BaseEntity;
-import com.springboot.university.domain.student.StudentDepartment;
+import com.springboot.university.domain.StudentDepartment.StudentDepartment;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Department extends BaseEntity {
 
     @Id
