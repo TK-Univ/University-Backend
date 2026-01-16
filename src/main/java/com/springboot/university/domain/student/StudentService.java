@@ -4,6 +4,7 @@ import com.springboot.university.domain.StudentDepartment.StudentDepartment;
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.DepartmentRepository;
 import com.springboot.university.domain.department.MajorType;
+import com.springboot.university.domain.student.dto.StudentBriefInfoDTO;
 import com.springboot.university.domain.student.dto.StudentRegisterRequestDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final DepartmentRepository departmentRepository;
 
-    public List<String> fetchNames() {
-        return studentRepository.findAllNames();
+    public List<StudentBriefInfoDTO> getStudentsList() {
+        return studentRepository.getStudentsList();
     }
 
     public Long register(StudentRegisterRequestDTO dto) {

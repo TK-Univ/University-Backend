@@ -55,7 +55,19 @@ public class DataInitializer implements CommandLineRunner {
                 .password(passwordEncoder.encode("1234")) // 비밀번호 암호화 필수!
                 .build();
 
+        Student student2 = Student.builder()
+                .id(20250001L)
+                .name("성춘향")
+                .birth(LocalDate.of(1999, 1, 1))
+                .sex("F")
+                .grade(2)
+                .status(StudentStatus.ENROLLED) // Enum 확인
+                .contact("010-1234-5678")
+                .password(passwordEncoder.encode("2234")) // 비밀번호 암호화 필수!
+                .build();
+
         studentRepository.save(student1);
+        studentRepository.save(student2);
 
         // 3. 학생-학과 연결 (주전공)
         StudentDepartment link1 = StudentDepartment.builder()
@@ -64,7 +76,14 @@ public class DataInitializer implements CommandLineRunner {
                 .majorType(MajorType.MAJOR)
                 .build();
 
+        StudentDepartment link2 = StudentDepartment.builder()
+                .student(student2)
+                .department(dept2) // 컴공과 연결
+                .majorType(MajorType.MAJOR)
+                .build();
+
         studentDepartmentRepository.save(link1);
+        studentDepartmentRepository.save(link2);
 
         staffRepository.save(Staff.builder()
                 .userId("kyuris")
