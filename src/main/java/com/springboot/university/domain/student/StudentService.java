@@ -5,6 +5,7 @@ import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.DepartmentRepository;
 import com.springboot.university.domain.department.MajorType;
 import com.springboot.university.domain.student.dto.StudentBriefInfoDTO;
+import com.springboot.university.domain.student.dto.StudentInfoDTO;
 import com.springboot.university.domain.student.dto.StudentRegisterRequestDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,13 @@ public class StudentService {
 
     public List<StudentBriefInfoDTO> getStudentsList() {
         return studentRepository.getStudentsList();
+    }
+
+    public StudentInfoDTO getStudentInfo(Long studentId) {
+        StudentInfoDTO studentInfoDTO = studentRepository.findStudentInfoById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학생입니다: " + studentId));
+
+        return studentInfoDTO;
     }
 
     public Long register(StudentRegisterRequestDTO dto) {

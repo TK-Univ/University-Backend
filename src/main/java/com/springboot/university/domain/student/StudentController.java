@@ -2,6 +2,7 @@ package com.springboot.university.domain.student;
 
 import com.springboot.university.common.response.BaseResponse;
 import com.springboot.university.domain.student.dto.StudentBriefInfoDTO;
+import com.springboot.university.domain.student.dto.StudentInfoDTO;
 import com.springboot.university.domain.student.dto.StudentRegisterRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,5 +33,11 @@ public class StudentController {
     public BaseResponse<List<StudentBriefInfoDTO>> getStudentInfoList() {
         List<StudentBriefInfoDTO> dto = studentService.getStudentsList();
         return new BaseResponse<>(SUCCESS, dto);
+    }
+
+    @GetMapping("/detail/{id}")
+    public BaseResponse<StudentInfoDTO> getStudentInfo(@PathVariable("id") Long studentId) {
+        StudentInfoDTO studentInfoDTO = studentService.getStudentInfo(studentId);
+        return new BaseResponse<>(SUCCESS, studentInfoDTO);
     }
 }
