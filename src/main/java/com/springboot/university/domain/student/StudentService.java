@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,8 +34,13 @@ public class StudentService {
     }
 
     public Long register(StudentRegisterRequestDTO dto) {
-        Department department = departmentRepository.findByDeptName(dto.deptName())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학과입니다: " + dto.deptName()));
+        List<Department> departmentList = new ArrayList<>();
+        for(String deptName : dto.deptName()) {
+            Department department = departmentRepository.findByDeptName(deptName)
+                    .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학과입니다: " + dto.deptName()));
+            departmentList.add(department);
+        }
+
 
         Long studentId = generateStudentId(dto);
 
@@ -50,13 +56,13 @@ public class StudentService {
 
         studentRepository.save(student);
 
-
-        StudentDepartment mainMajor = StudentDepartment.builder()
-                .student(student)
-                .department(department)
-                .majorType(MajorType.MAJOR)
-                .build();
-
+        for(Department department : departmentList) {
+            StudentDepartment mainMajor = StudentDepartment.builder()
+                    .student(student)
+                    .department(department)
+                    .majorType(MajorType.MAJOR)
+                    .build();
+        }
 
         return student.getId();
 

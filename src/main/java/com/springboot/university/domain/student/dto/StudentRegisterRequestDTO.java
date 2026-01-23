@@ -4,6 +4,7 @@ import com.springboot.university.domain.student.StudentStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record StudentRegisterRequestDTO (
 
@@ -20,7 +21,7 @@ public record StudentRegisterRequestDTO (
 
     String contact,
 
-    String deptName
+    List<String> deptName
 ) {
 
 }
