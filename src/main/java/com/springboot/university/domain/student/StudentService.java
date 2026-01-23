@@ -1,6 +1,7 @@
 package com.springboot.university.domain.student;
 
 import com.springboot.university.domain.StudentDepartment.StudentDepartment;
+import com.springboot.university.domain.StudentDepartment.StudentDepartmentRepository;
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.DepartmentRepository;
 import com.springboot.university.domain.department.MajorType;
@@ -21,6 +22,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final DepartmentRepository departmentRepository;
+    private final StudentDepartmentRepository studentDepartmentRepository;
 
     public List<StudentBriefInfoDTO> getStudentsList() {
         return studentRepository.getStudentsList();
@@ -62,6 +64,7 @@ public class StudentService {
                     .department(department)
                     .majorType(MajorType.MAJOR)
                     .build();
+            studentDepartmentRepository.save(mainMajor);
         }
 
         return student.getId();
