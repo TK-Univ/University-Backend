@@ -53,7 +53,7 @@ public class StudentService {
                 .sex(dto.sex())
                 .grade(dto.grade())
                 .status(dto.status())
-                .contact(dto.contact())
+                .email(dto.email())
                 .build();
 
         studentRepository.save(student);

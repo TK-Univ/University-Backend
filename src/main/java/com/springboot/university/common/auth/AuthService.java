@@ -65,4 +65,26 @@ public class AuthService {
         return new LoginResponseDTO(student.getName(), STUDENT_AUTH, token);
 
     }
+
+    public String setPassword(String email, String password) {
+        Optional<String> staffId =
+                staffRepository.findByEmail(email)
+                        .map(staff -> {
+                            staffRepository.updatePassword(staff.getEmail(), passwordEncoder.encode(password));
+                            return staff.getUserId();
+                        });
+
+        if (staffId.isPresent()) {
+            return staffId.get();
+        }
+
+        Optional<String> studentId =
+                studentRepository.findByEmail(email)
+                        .map(student -> {
+                            studentRepository.updatePassword(student.getEmail(), passwordEncoder.encode(password));
+                            return student.getId().toString();
+                        });
+
+        return studentId.orElse(null);
+    }
 }

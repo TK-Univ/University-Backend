@@ -3,6 +3,7 @@ package com.springboot.university.domain.student;
 import com.springboot.university.domain.student.dto.StudentBriefInfoDTO;
 import com.springboot.university.domain.student.dto.StudentInfoDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -31,7 +32,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             s.sex, 
             s.grade, 
             s.status, 
-            s.contact, 
+            s.email, 
             d.deptName
         ) 
         FROM Student s
@@ -43,7 +44,13 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Optional<Student> findById(Long studentId);
 
+    Optional<Student> findByEmail(String email);
+
     @Query("select max(s.id) from Student s")
     Optional<Long> findMaxId();
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE Student s SET s.password = :password WHERE s.email = :email")
+    void updatePassword(@Param("email") String email, @Param("password") String password);
 
 }

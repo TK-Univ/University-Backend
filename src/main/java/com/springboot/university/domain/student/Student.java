@@ -39,7 +39,7 @@ public class Student extends BaseEntity {
     private String password;
 
     @Column(length = 40)
-    private String contact;
+    private String email;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<StudentDepartment> departments = new ArrayList<>();

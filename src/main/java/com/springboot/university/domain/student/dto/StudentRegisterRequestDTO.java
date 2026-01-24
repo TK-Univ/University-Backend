@@ -19,7 +19,7 @@ public record StudentRegisterRequestDTO (
 
     StudentStatus status,
 
-    String contact,
+    String email,
 
     List<String> deptName
 ) {

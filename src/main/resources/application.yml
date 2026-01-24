@@ -4,3 +4,15 @@ spring:
 
   profiles:
     active: local
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${LOCAL_EMAIL}
+    password: ${APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true

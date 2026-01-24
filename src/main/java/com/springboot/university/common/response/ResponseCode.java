@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public enum ResponseCode {
 
     SUCCESS(true, 1000, "요청에 성공하였습니다."),
+    FAILURE(false, 1001, "요청에 실패하였습니다."),
     ROLE_REQUIRE(false, 1001, "역할이 지정되지 않았습니다. 운영진에게 문의주세요."),
     AWS_S3_UPLOAD_ISSUE(false, 1002, "파일 업로드 중 문제가 발생했습니다."),
     EXPIRED_ACCESS_TOKEN(false, 1003, "이미 만료된 Access 토큰입니다."),

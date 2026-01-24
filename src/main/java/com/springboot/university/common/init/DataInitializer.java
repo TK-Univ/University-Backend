@@ -51,7 +51,7 @@ public class DataInitializer implements CommandLineRunner {
                 .sex("M")
                 .grade(1)
                 .status(StudentStatus.ENROLLED) // Enum 확인
-                .contact("010-1234-5678")
+                .email("aaa@naver.com")
                 .password(passwordEncoder.encode("1234")) // 비밀번호 암호화 필수!
                 .build();
 
@@ -62,7 +62,7 @@ public class DataInitializer implements CommandLineRunner {
                 .sex("F")
                 .grade(2)
                 .status(StudentStatus.ENROLLED) // Enum 확인
-                .contact("010-1234-5678")
+                .email("ddd@naver.com")
                 .password(passwordEncoder.encode("2234")) // 비밀번호 암호화 필수!
                 .build();
 
@@ -89,6 +89,7 @@ public class DataInitializer implements CommandLineRunner {
                 .userId("kyuris")
                 .staffName("김철수")
                 .position("총장")
+                .email("ggg@naver.com")
                 .password(passwordEncoder.encode("1111"))
                 .authority(StaffAuthority.ADMIN)
                 .build());
