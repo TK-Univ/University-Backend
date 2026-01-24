@@ -41,6 +41,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     """)
     Optional<StudentInfoDTO> findStudentInfoById(@Param("studentId") Long studentId);
 
+    Optional<Student> findById(Long studentId);
+
     @Query("select max(s.id) from Student s")
     Optional<Long> findMaxId();
 

@@ -3,10 +3,14 @@ package com.springboot.university.common.auth;
 import com.springboot.university.common.jwt.JwtUtil;
 import com.springboot.university.domain.staff.Staff;
 import com.springboot.university.domain.staff.StaffRepository;
+import com.springboot.university.domain.student.Student;
+import com.springboot.university.domain.student.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -16,22 +20,49 @@ public class AuthService {
     private final StaffRepository staffRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final StudentRepository studentRepository;
+    private final String STUDENT_AUTH = "STUDENT";
 
     public LoginResponseDTO login(LoginRequestDTO dto) {
-        System.out.println(dto.toString());
-        Staff staff = staffRepository.findByUserId(dto.userId())
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 아이디이거나, 잘못된 비밀번호입니다."));
+        Optional<Staff> staffOptional = staffRepository.findByUserId(dto.userId());
 
+        if (staffOptional.isPresent()) {
+            return loginStaff(dto, staffOptional.get());
+        }
+
+        Optional<Student> studentOptional = studentRepository.findById(Long.valueOf(dto.userId()));
+
+        if (studentOptional.isPresent()) {
+            return loginStudent(dto, studentOptional.get());
+        }
+
+        throw new IllegalArgumentException("가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+
+    }
+
+    public LoginResponseDTO loginStaff(LoginRequestDTO dto, Staff staff) {
         if (!passwordEncoder.matches(dto.password(), staff.getPassword())) {
             throw new IllegalArgumentException("가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.");
         }
 
-        // 인증 성공 시, 토큰(Access Token) 생성 및 반환
-        // 토큰에는 보통 "PK(id)"나 "아이디(userId)", "권한(Role)" 정보를 담습니다.
-        String token = jwtUtil.createToken(staff.getUserId(), staff.getAuthority());
+        System.out.println("직원 로그인 - " + dto.toString());
 
-        LoginResponseDTO loginResponseDTO = new LoginResponseDTO(staff.getStaffName(), staff.getAuthority(), token);
+        String token = jwtUtil.createToken(staff.getUserId(), staff.getAuthority().toString());
+        return new LoginResponseDTO(staff.getStaffName(), staff.getAuthority().toString(), token);
 
-        return loginResponseDTO;
+    }
+
+    public LoginResponseDTO loginStudent(LoginRequestDTO dto, Student student) {
+
+        if (!passwordEncoder.matches(dto.password(), student.getPassword())) {
+            throw new IllegalArgumentException("가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+        }
+
+
+        System.out.println("학생 로그인 - " + dto.toString());
+
+        String token = jwtUtil.createToken(String.valueOf(student.getId()), STUDENT_AUTH);
+        return new LoginResponseDTO(student.getName(), STUDENT_AUTH, token);
+
     }
 }
