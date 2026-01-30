@@ -1,7 +1,7 @@
 package com.springboot.university.domain.student;
 
-import com.springboot.university.domain.StudentDepartment.StudentDepartment;
-import com.springboot.university.domain.StudentDepartment.StudentDepartmentRepository;
+import com.springboot.university.domain.student_department.StudentDepartment;
+import com.springboot.university.domain.student_department.StudentDepartmentRepository;
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.DepartmentRepository;
 import com.springboot.university.domain.department.MajorType;

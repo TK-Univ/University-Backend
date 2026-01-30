@@ -1,4 +1,4 @@
-package com.springboot.university.domain.StudentDepartment;
+package com.springboot.university.domain.student_department;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

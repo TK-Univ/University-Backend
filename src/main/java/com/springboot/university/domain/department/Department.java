@@ -1,7 +1,7 @@
 package com.springboot.university.domain.department;
 
 import com.springboot.university.common.BaseEntity;
-import com.springboot.university.domain.StudentDepartment.StudentDepartment;
+import com.springboot.university.domain.student_department.StudentDepartment;
 import jakarta.persistence.*;
 import lombok.*;
 

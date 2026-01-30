@@ -1,4 +1,4 @@
-package com.springboot.university.domain.StudentDepartment;
+package com.springboot.university.domain.student_department;
 
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.MajorType;

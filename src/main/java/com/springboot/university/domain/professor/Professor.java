@@ -3,13 +3,13 @@ package com.springboot.university.domain.professor;
 import com.springboot.university.common.BaseEntity;
 import com.springboot.university.domain.department.Department;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Professor extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
