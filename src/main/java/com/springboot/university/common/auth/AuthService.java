@@ -48,7 +48,7 @@ public class AuthService {
         System.out.println("직원 로그인 - " + dto.toString());
 
         String token = jwtUtil.createToken(staff.getUserId(), staff.getAuthority().toString());
-        return new LoginResponseDTO(staff.getStaffName(), staff.getAuthority().toString(), token);
+        return new LoginResponseDTO(staff.getUserId(), staff.getStaffName(), staff.getAuthority().toString(), token);
 
     }
 
@@ -62,7 +62,7 @@ public class AuthService {
         System.out.println("학생 로그인 - " + dto.toString());
 
         String token = jwtUtil.createToken(String.valueOf(student.getId()), STUDENT_AUTH);
-        return new LoginResponseDTO(student.getName(), STUDENT_AUTH, token);
+        return new LoginResponseDTO(student.getId().toString(), student.getName(), STUDENT_AUTH, token);
 
     }
 

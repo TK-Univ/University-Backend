@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.springboot.university.common.response.ResponseCode.FAILURE;
-import static com.springboot.university.common.response.ResponseCode.SUCCESS;
+import static com.springboot.university.common.response.ResponseCode.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -33,7 +32,7 @@ public class AuthController {
         if(emailService.sendVerificationCode(request.getEmail())) {
             return new BaseResponse<>(SUCCESS);
         }
-        return new BaseResponse<>(FAILURE);
+        return new BaseResponse<>(INVALID_EMAIL);
     }
 
     @PostMapping("/email-verify")

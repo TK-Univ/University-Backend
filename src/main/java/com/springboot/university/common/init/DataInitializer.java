@@ -12,6 +12,7 @@ import com.springboot.university.domain.StudentDepartment.StudentDepartment;
 import com.springboot.university.domain.student.StudentRepository;
 import com.springboot.university.domain.student.StudentStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,9 @@ public class DataInitializer implements CommandLineRunner {
     private final StudentDepartmentRepository studentDepartmentRepository;
     private final StaffRepository staffRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${init.data.email}")
+    private String initEmail;
 
     @Override
     public void run(String... args) throws Exception {
@@ -89,7 +93,7 @@ public class DataInitializer implements CommandLineRunner {
                 .userId("kyuris")
                 .staffName("김철수")
                 .position("총장")
-                .email("ggg@naver.com")
+                .email(initEmail)
                 .password(passwordEncoder.encode("1111"))
                 .authority(StaffAuthority.ADMIN)
                 .build());

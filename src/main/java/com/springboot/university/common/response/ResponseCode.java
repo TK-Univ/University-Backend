@@ -23,7 +23,10 @@ public enum ResponseCode {
     INVALID_SIGNATURE_JWT(false, 1006, "인증 시그니처가 올바르지 않습니다"),
     INVALID_TOKEN_TYPE(false, 1007, "잘못된 토큰입니다."),
     BAD_REQUEST(false, 1008, "잘못된 요청입니다."),
-    INVALID_INPUT_ENUM(false, 1009, "입력값이 올바르지 않습니다. 허용된 값 중 하나를 사용해야 합니다.");
+    INVALID_INPUT_ENUM(false, 1009, "입력값이 올바르지 않습니다. 허용된 값 중 하나를 사용해야 합니다."),
+
+    // 이메일 인증 서비스
+    INVALID_EMAIL(false, 2000, "등록된 사용자 이메일이 아닙니다.");
 
     private boolean isSuccess;
     private int code;
