@@ -41,6 +41,9 @@ public class Lecture extends BaseEntity {
     @Column(columnDefinition = "int default 0")
     private Integer enrollCnt;
 
+    @Column(nullable = false)
+    private Integer maxEnrollCnt;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
