@@ -141,6 +141,7 @@ public class DataInitializer implements CommandLineRunner {
                 .startTime(LocalTime.of(9, 0))
                 .endTime(LocalTime.of(11, 0))
                 .enrollCnt(0)
+                .maxEnrollCnt(40)
                 .subject(subject1)
                 .build();
 

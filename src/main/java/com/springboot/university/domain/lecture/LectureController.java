@@ -2,8 +2,10 @@ package com.springboot.university.domain.lecture;
 
 import com.springboot.university.common.response.BaseResponse;
 import com.springboot.university.domain.lecture.dto.LectureBriefInfoDTO;
+import com.springboot.university.domain.lecture.dto.LectureDetailInfoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +21,13 @@ public class LectureController {
     private final LectureService lectureService;
 
     @GetMapping("/list")
-    public BaseResponse<List<LectureBriefInfoDTO>> getStudentInfoList() {
+    public BaseResponse<List<LectureBriefInfoDTO>> getLectureInfoList() {
         List<LectureBriefInfoDTO> dto = lectureService.getLectureList();
         return new BaseResponse<>(SUCCESS, dto);
+    }
+
+    @GetMapping("/info/{lectureId}")
+    public BaseResponse<LectureDetailInfoDTO> getLectureInfo(@PathVariable Long lectureId) {
+        return new BaseResponse<>(SUCCESS, lectureService.getLectureDetail(lectureId));
     }
 }
