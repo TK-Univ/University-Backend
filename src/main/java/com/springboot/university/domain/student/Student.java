@@ -1,6 +1,7 @@
 package com.springboot.university.domain.student;
 
 import com.springboot.university.common.BaseEntity;
+import com.springboot.university.domain.enrollment.Enrollment;
 import com.springboot.university.domain.student_department.StudentDepartment;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,4 +44,7 @@ public class Student extends BaseEntity {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<StudentDepartment> departments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Enrollment> enrollments = new ArrayList<>();
 }
