@@ -1,5 +1,7 @@
 package com.springboot.university.domain.enrollment;
 
+import com.springboot.university.common.exception.CustomException;
+import com.springboot.university.common.response.ResponseCode;
 import com.springboot.university.domain.enrollment.dto.EnrollmentInfoDTO;
 import com.springboot.university.domain.enrollment.dto.EnrollmentRequestDTO;
 import com.springboot.university.domain.lecture.Lecture;
@@ -24,21 +26,23 @@ public class EnrollmentService {
 
     public Long enroll(EnrollmentRequestDTO dto) {
         Student student = studentRepository.findById(dto.studentId())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학생입니다."));
+                .orElseThrow(() -> new CustomException(ResponseCode.NONE_STUDENT));
 
         Lecture lecture = lectureRepository.findById(dto.lectureId())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 강의입니다."));
+                .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
 
         if (enrollmentRepository.existsByStudentAndLecture(student, lecture)) {
-            throw new IllegalArgumentException("이미 수강 신청한 강의입니다.");
+            throw new CustomException(ResponseCode.ALREADY_ENROLLED);
         }
 
         int affectedRows = lectureRepository.increaseEnrollment(dto.lectureId());
 
         if (affectedRows == 0) {
-            // 0이 반환되었다면? -> 정원이 꽉 찼거나 강의 ID가 잘못됨
-            // 정확한 원인 파악을 위해 조회 한 번 더 하거나, 바로 예외 던짐
-            throw new IllegalStateException("수강 정원이 초과되었거나 존재하지 않는 강의입니다.");
+            Integer enrollCnt = lectureRepository.findEnrollCntById(dto.lectureId())
+                    .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
+            Integer maxEnrollCnt = lectureRepository.findMaxEnrollCntById(dto.lectureId())
+                    .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
+            if(enrollCnt == maxEnrollCnt) throw new CustomException(ResponseCode.ENROLL_CNT_MAX);
         }
 
         Enrollment enrollment = Enrollment.builder()
@@ -56,7 +60,7 @@ public class EnrollmentService {
     @Transactional(readOnly = true)
     public List<EnrollmentInfoDTO> getMyEnrollments(Long studentId) {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학생입니다."));
+                .orElseThrow(() -> new CustomException(ResponseCode.NONE_STUDENT));
 
         return student.getEnrollments().stream()
                 .map(e -> {
