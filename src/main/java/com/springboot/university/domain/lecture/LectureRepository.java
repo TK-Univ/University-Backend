@@ -26,6 +26,9 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     @Query("SELECT l.enrollCnt FROM Lecture l WHERE l.id = :id")
     Optional<Integer> findEnrollCntById(@Param("id") Long id);
 
+    @Query("SELECT l.maxEnrollCnt FROM Lecture l WHERE l.id = :id")
+    Optional<Integer> findMaxEnrollCntById(@Param("id") Long id);
+
     /**
      * 2. 수강 인원 1 증가 (수강 신청)
      * 조건: 현재 인원이 최대 인원보다 작을 때만 증가 (Concurrency safe)

@@ -32,7 +32,7 @@ public class AuthController {
         if(emailService.sendVerificationCode(request.getEmail())) {
             return new BaseResponse<>(SUCCESS);
         }
-        return new BaseResponse<>(INVALID_EMAIL);
+        return new BaseResponse<>(NONE_EMAIL);
     }
 
     @PostMapping("/email-verify")
