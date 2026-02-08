@@ -3,13 +3,34 @@ spring:
     activate:
       on-profile: prod
 
+  # 운영 환경에서는 실제 RDS(MariaDB) 주소를 사용합니다.
   datasource:
-    url: jdbc:mariadb://prod-db-host:3306/university
-    username: univ_manager
-    password: ${DB_PASSWORD}
+    url: ${PROD_DB_URL}
+    username: ${PROD_DB_USERNAME}
+    password: ${PROD_DB_PASSWORD}
     driver-class-name: org.mariadb.jdbc.Driver
 
+  # ⚠️ 매우 중요: 운영 환경에서 create를 사용하면 서버 재시작 시 데이터가 모두 삭제됩니다.
+  # 보통 'none' 또는 'validate'를 사용합니다.
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: false
+    show-sql: false # 운영 환경에서는 로그가 너무 많이 쌓이지 않게 끕니다.
+    properties:
+      hibernate:
+        format_sql: false
+
+  # EC2에 설치된 Redis 정보를 넣습니다. (localhost인 경우 그대로 유지)
+  data:
+    redis:
+      host: ${PROD_REDIS_HOST:localhost}
+      port: 6379
+
+# 이메일, JWT 등 민감 정보는 환경변수로 관리합니다.
+jwt:
+  secret: ${PROD_JWT_SECRET}
+  expiration: 3600000
+
+init:
+  data:
+    email: ${PROD_INIT_EMAIL}
