@@ -1,5 +1,6 @@
 package com.springboot.university.domain.student_department;
 
+import com.springboot.university.common.BaseEntity;
 import com.springboot.university.domain.department.Department;
 import com.springboot.university.domain.department.MajorType;
 import com.springboot.university.domain.student.Student;
@@ -11,7 +12,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class StudentDepartment {
+public class StudentDepartment extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

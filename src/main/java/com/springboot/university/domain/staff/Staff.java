@@ -1,5 +1,6 @@
 package com.springboot.university.domain.staff;
 
+import com.springboot.university.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Staff {
+public class Staff extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

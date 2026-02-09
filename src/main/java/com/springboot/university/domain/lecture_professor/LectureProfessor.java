@@ -1,5 +1,6 @@
 package com.springboot.university.domain.lecture_professor;
 
+import com.springboot.university.common.BaseEntity;
 import com.springboot.university.domain.lecture.Lecture;
 import com.springboot.university.domain.professor.Professor;
 import jakarta.persistence.*;
@@ -10,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class LectureProfessor {
+public class LectureProfessor extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
