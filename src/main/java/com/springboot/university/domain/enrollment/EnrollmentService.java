@@ -35,14 +35,20 @@ public class EnrollmentService {
             throw new CustomException(ResponseCode.ALREADY_ENROLLED);
         }
 
+//        int affectedRows = lectureRepository.increaseEnrollment(dto.lectureId());
+//
+//        if (affectedRows == 0) {
+//            Integer enrollCnt = lectureRepository.findEnrollCntById(dto.lectureId())
+//                    .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
+//            Integer maxEnrollCnt = lectureRepository.findMaxEnrollCntById(dto.lectureId())
+//                    .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
+//            if(enrollCnt == maxEnrollCnt) throw new CustomException(ResponseCode.ENROLL_CNT_MAX);
+//        }
+
         int affectedRows = lectureRepository.increaseEnrollment(dto.lectureId());
 
         if (affectedRows == 0) {
-            Integer enrollCnt = lectureRepository.findEnrollCntById(dto.lectureId())
-                    .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
-            Integer maxEnrollCnt = lectureRepository.findMaxEnrollCntById(dto.lectureId())
-                    .orElseThrow(() -> new CustomException(ResponseCode.NONE_LECTURE));
-            if(enrollCnt == maxEnrollCnt) throw new CustomException(ResponseCode.ENROLL_CNT_MAX);
+            throw new CustomException(ResponseCode.ENROLL_CNT_MAX);
         }
 
         Enrollment enrollment = Enrollment.builder()
