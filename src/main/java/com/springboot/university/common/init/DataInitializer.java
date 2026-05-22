@@ -3,6 +3,8 @@ package com.springboot.university.common.init;
 import com.springboot.university.domain.lecture.Lecture;
 import com.springboot.university.domain.lecture_professor.LectureProfessor;
 import com.springboot.university.domain.lecture_professor.LectureProfessorRepository;
+import com.springboot.university.domain.notification.Notification;
+import com.springboot.university.domain.notification.NotificationRepository;
 import com.springboot.university.domain.professor.Professor;
 import com.springboot.university.domain.student_department.StudentDepartmentRepository;
 import com.springboot.university.domain.department.Department;
@@ -44,6 +46,7 @@ public class DataInitializer implements CommandLineRunner {
     private final ProfessorRepository professorRepository;
     private final LectureRepository lectureRepository;
     private final LectureProfessorRepository lectureProfessorRepository;
+    private final NotificationRepository notificationRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Value("${init.data.email}")
@@ -105,15 +108,25 @@ public class DataInitializer implements CommandLineRunner {
         studentDepartmentRepository.save(link1);
         studentDepartmentRepository.save(link2);
 
-        staffRepository.save(Staff.builder()
+
+        Staff staff = Staff.builder()
                 .userId("kyuris")
                 .staffName("김철수")
                 .position("총장")
                 .email(initEmail)
                 .password(passwordEncoder.encode("1111"))
                 .authority(StaffAuthority.ADMIN)
-                .build());
+                .build();
 
+        staffRepository.save(staff);
+
+        // 공지사항 생성
+        notificationRepository.save(Notification.builder()
+                .title("공지사항: 다음주 시험")
+                .content("다음주 시험이니까 공부 열심히 하십쇼")
+                .writer(staff)
+                .build()
+        );
 
         // 4. 과목 데이터 생성
         Subject subject1 = subjectRepository.save(Subject.builder()
